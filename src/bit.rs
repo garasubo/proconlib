@@ -1,5 +1,6 @@
 use std::ops::{AddAssign, SubAssign};
 
+#[derive(Clone)]
 pub struct BIT<T> {
     n: usize,
     bits: Vec<T>,
