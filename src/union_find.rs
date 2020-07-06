@@ -16,8 +16,8 @@ impl UnionFind {
     }
 
     pub fn union(&mut self, l: usize, r: usize) {
-        let mut lp = self.get_par(l);
-        let mut rp = self.get_par(r);
+        let lp = self.get_par(l);
+        let rp = self.get_par(r);
 
         if lp != rp {
             self.parent[lp] = rp;
