@@ -5,7 +5,7 @@ pub struct BIT<T> {
     n: usize,
     bits: Vec<T>,
 }
- 
+
 impl<T: Default + Copy + AddAssign + SubAssign> BIT<T> {
     pub fn new(n: usize) -> Self {
         let mut m = 1;
@@ -17,29 +17,29 @@ impl<T: Default + Copy + AddAssign + SubAssign> BIT<T> {
             bits: vec![T::default(); m + 1],
         }
     }
- 
+
     pub fn add(&mut self, a: usize, w: T) {
         let mut x = a as i32 + 1;
         while x <= self.n as i32 {
             self.bits[(x as usize)] += w;
-            x += x&-x;
+            x += x & -x;
         }
     }
-    
+
     pub fn sub(&mut self, a: usize, w: T) {
         let mut x = a as i32 + 1;
         while x <= self.n as i32 {
             self.bits[(x as usize)] -= w;
-            x += x&-x;
+            x += x & -x;
         }
     }
- 
+
     pub fn sum(&self, a: usize) -> T {
         let mut ret = T::default();
         let mut x = a as i32 + 1;
         while x > 0 {
             ret += self.bits[x as usize];
-            x -= x&-x;
+            x -= x & -x;
         }
         ret
     }
@@ -72,4 +72,3 @@ mod tests {
         assert_eq!(4, bit.sum(7));
     }
 }
-

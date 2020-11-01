@@ -18,12 +18,15 @@ impl<T: Clone> Graph<T> {
 }
 
 impl Graph<i64> {
-
     pub fn add_edge(&mut self, from: usize, to: usize, cap: i64) {
         let flen = self.edges[from].len();
         let tlen = self.edges[to].len();
         self.edges[from].push(Edge { to, cap, rev: tlen });
-        self.edges[to].push(Edge { to: from, cap: 0, rev: flen });
+        self.edges[to].push(Edge {
+            to: from,
+            cap: 0,
+            rev: flen,
+        });
     }
 
     fn dfs(&mut self, v: usize, t: usize, f: i64, used: &mut Vec<bool>) -> i64 {
@@ -61,7 +64,6 @@ impl Graph<i64> {
     }
 }
 
-
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -73,7 +75,7 @@ mod tests {
         graph.add_edge(0, 1, 1);
         graph.add_edge(0, 2, 1);
         graph.add_edge(0, 3, 1);
-        
+
         graph.add_edge(4, 7, 1);
         graph.add_edge(5, 7, 1);
         graph.add_edge(6, 7, 1);
@@ -86,4 +88,3 @@ mod tests {
         assert_eq!(2, graph.max_flow(0, 7, 100));
     }
 }
-

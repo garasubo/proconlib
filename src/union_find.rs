@@ -4,14 +4,14 @@ pub struct UnionFind {
 }
 
 impl UnionFind {
-    pub fn new(n : usize)-> UnionFind {
+    pub fn new(n: usize) -> UnionFind {
         let mut par = Vec::with_capacity(n);
         for i in 0..n {
             par.push(i);
         }
         UnionFind {
             parent: par,
-            size: vec![1; n]
+            size: vec![1; n],
         }
     }
 
