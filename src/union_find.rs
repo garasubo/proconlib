@@ -1,3 +1,4 @@
+#[derive(Clone, Debug)]
 pub struct UnionFind {
     parent: Vec<usize>,
     size: Vec<usize>,
@@ -26,11 +27,11 @@ impl UnionFind {
     }
 
     pub fn get_par(&mut self, tar: usize) -> usize {
-        let mut par = tar;
-        while self.parent[par] != par {
-            par = self.parent[par];
+        let mut par = self.parent[tar];
+        if self.parent[par] != par {
+            par = self.get_par(par);
+            self.parent[tar] = par;
         }
-        self.parent[tar] = par;
         par
     }
 
